@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
@@ -10,10 +11,10 @@ def index():
 def media_km ():
     distancia = float(request.form['distancia'])
     velocidade = float(request.form['velocidade'])
+    media = round(distancia / velocidade, 2)
+    tempo= str(timedelta(hours=media))
 
-    media = distancia/velocidade
-
-    return render_template('index.html', media=media)
+    return render_template('index.html', media=tempo)
 
 if __name__ == '__main__':
     app.run(debug=True)
